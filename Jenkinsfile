@@ -44,24 +44,9 @@ pipeline {
         stage('Deploy') {
             steps {
                 bat """
-                echo ==============================
-                echo Deploying to IIS folder
-                echo ==============================
-
-                echo Stopping IIS site (optional safe copy mode)...
-                REM NOTE: We are NOT using iisreset or appcmd due to permissions issues
-
-                echo Cleaning target folder...
-                if exist "%DEPLOY_DIR%" (
-                    rmdir /s /q "%DEPLOY_DIR%"
-                )
-
-                mkdir "%DEPLOY_DIR%"
-
                 echo Copying files...
-                xcopy /s /e /y "%PUBLISH_DIR%\\*" "%DEPLOY_DIR%\\"
+                xcopy /s /e /y publish\\* C:\\inetpub\\wwwroot\\JenkinsTutorialWebsite\\
 
-                echo Deployment completed successfully
                 """
             }
         }
