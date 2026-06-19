@@ -5,7 +5,7 @@ pipeline {
         stage('build') {
             steps {
                 echo 'building Hello World'
-                dotnet --version
+                bat 'dotnet --version'
             }
         }
     }
