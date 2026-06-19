@@ -37,7 +37,7 @@ pipeline {
         stage('Publish') {
             steps {
                 // Compiles the .NET application
-                bat "dotnet publish ./JenkinsTutorialWebsite/JenkinsTutorialWebsite.csproj -c Release -o publish"
+                bat "dotnet publish ./JenkinsTutorialWebsite/JenkinsTutorialWebsite.csproj -c Release -o ${PUBLISH_DIR} --no-build"
             }
         }
 
