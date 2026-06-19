@@ -33,7 +33,7 @@ pipeline {
                 bat "dotnet build ./JenkinsTutorialWebsite --configuration ${BUILD_CONFIG} --no-restore"
             }
         }
-        stage('Build Code') {
+        stage('Release') {
             steps {
                 // Compiles the .NET application
                 bat "dotnet run -c Release --project ./JenkinsTutorialWebsite/JenkinsTutorialWebsite.csproj"
