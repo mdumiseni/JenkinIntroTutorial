@@ -51,7 +51,7 @@ pipeline {
                 )
 
                 mkdir "%DEPLOY_DIR%"
-                xcopy /s /e /y "%PUBLISH_DIR%\\*" "%DEPLOY_DIR%"
+                xcopy /s /e /y "%PUBLISH_DIR%\\*" "%DEPLOY_DIR%" 
                 """
             }
         }
