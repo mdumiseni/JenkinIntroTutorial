@@ -6,19 +6,20 @@ pipeline {
         PATH = "${env.PATH};${env.DOTNET_ROOT}"
     }
     stages {
-        
-        stage('checkout') {
-            steps {
-                echo 'checking out code'
-                git 'https://github.com/mdumiseni/JenkinIntroTutorial.git'
-            }
-        }
+
         stage('build') { 
             steps {
                 echo 'building Hello World'
                 bat 'dotnet --version'
             }
         }
+        stage('checkout') {
+            steps {
+                echo 'checking out code : https://github.com/mdumiseni/JenkinIntroTutorial.git'
+                checkout scm
+            }
+        }
+
         stage('Restore Dependencies') {
             steps {
                 // Restores NuGet packages
