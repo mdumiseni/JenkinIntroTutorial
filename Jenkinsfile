@@ -44,11 +44,8 @@ pipeline {
         stage('Deploy') {
             steps {
                    bat """
-                echo Deploying WITHOUT IIS restart...
-
-                robocopy %PUBLISH_DIR% %DEPLOY_DIR% /MIR /R:2 /W:2
-
-                echo Deployment complete
+                    echo Copying files...
+                    xcopy /s /e /y publish\\* C:\\inetpub\\wwwroot\\JenkinsTutorialWebsite\\
                 """
             }
         }
