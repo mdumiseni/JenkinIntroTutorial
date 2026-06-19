@@ -23,7 +23,7 @@ pipeline {
         stage('Restore Dependencies') {
             steps {
                 // Restores NuGet packages
-                bat 'dotnet restore .\JenkinsTutorialWebsite\JenkinsTutorialWebsite.csproj'
+                bat 'dotnet restore .\\JenkinsTutorialWebsite\\JenkinsTutorialWebsite.csproj'
             }
         }
         stage('Build Code') {
