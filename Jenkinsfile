@@ -43,16 +43,14 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                 bat """
-                    echo Stopping IIS...
-                    iisreset /stop
+                bat """
+                echo Copying files...
+                xcopy /s /e /y publish\\* C:\\inetpub\\wwwroot\\JenkinsTutorialWebsite\\
 
-                    echo Copying files...
-                    xcopy /s /e /y publish\\* C:\\inetpub\\wwwroot\\JenkinsTutorialWebsite\\
-
-                    echo Starting IIS...
-                    iisreset /start
-                    """
+                echo Restarting App Pool...
+                %windir%\\system32\\inetsrv\\appcmd stop apppool /apppool.name:"JenkinsTutorialWebsiteAppPool"
+                %windir%\\system32\\inetsrv\\appcmd start apppool /apppool.name:"JenkinsTutorialWebsiteAppPool"
+                """
             }
         }
       
