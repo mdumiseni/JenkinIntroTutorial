@@ -31,7 +31,12 @@ pipeline {
             steps {
                 // Compiles the .NET application
                 bat "dotnet build ./JenkinsTutorialWebsite --configuration ${BUILD_CONFIG} --no-restore"
-                bat "dotnet dev-certs https --trust"
+            }
+        }
+        stage('Build Code') {
+            steps {
+                // Compiles the .NET application
+                bat "dotnet run -c Release --project ./JenkinsTutorialWebsite/JenkinsTutorialWebsite.csproj"
             }
         }
       
