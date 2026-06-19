@@ -37,22 +37,22 @@ pipeline {
         stage('Publish') {
             steps {
                 // Compiles the .NET application
-                bat "dotnet publish ./JenkinsTutorialWebsite/JenkinsTutorialWebsite.csproj -c Release -o ${DEPLOY_DIR}"
+                bat "dotnet publish ./JenkinsTutorialWebsite/JenkinsTutorialWebsite.csproj -c Release -o publish"
             }
         }
 
         stage('Deploy') {
             steps {
-                bat """
-                echo Deploying to IIS folder...
+                 bat """
+                    echo Stopping IIS...
+                    iisreset /stop
 
-                if exist "%DEPLOY_DIR%" (
-                    rmdir /s /q "%DEPLOY_DIR%"
-                )
+                    echo Copying files...
+                    xcopy /s /e /y publish\\* C:\\inetpub\\wwwroot\\JenkinsTutorialWebsite\\
 
-                mkdir "%DEPLOY_DIR%"
-                xcopy /s /e /y "%PUBLISH_DIR%\\*" "%DEPLOY_DIR%" 
-                """
+                    echo Starting IIS...
+                    iisreset /start
+                    """
             }
         }
       
