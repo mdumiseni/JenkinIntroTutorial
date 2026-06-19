@@ -23,13 +23,14 @@ pipeline {
         stage('Restore Dependencies') {
             steps {
                 // Restores NuGet packages
-                bat 'dotnet restore'
+                bat 'dotnet restore .\JenkinsTutorialWebsite\JenkinsTutorialWebsite.csproj'
             }
         }
         stage('Build Code') {
             steps {
                 // Compiles the .NET application
-                bat "dotnet build --configuration ${BUILD_CONFIG} --no-restore"
+                bat "dotnet build ./JenkinsTutorialWebsite --configuration ${BUILD_CONFIG} --no-restore"
+                bat "dotnet dev-certs https --trust"
             }
         }
       
