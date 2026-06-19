@@ -55,15 +55,14 @@ pipeline {
                 """
             }
         }
-
-        post {
-            success {
-                echo '✅ Deployment successful!'
-            }
-            failure {
-                echo '❌ Deployment failed!'
-            }
-        }
       
     }
+    post {
+    success {
+        echo '✅ Deployment successful!'
+    }
+    failure {
+        echo '❌ Deployment failed!'
+    }
+}
 }
