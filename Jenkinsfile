@@ -43,11 +43,19 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                bat """
-                echo Copying files...
-                xcopy /s /e /y publish\\* C:\\inetpub\\wwwroot\\JenkinsTutorialWebsite\\
+                  bat """
+                    echo Stopping App Pool...
 
-                """
+                    %windir%\\system32\\inetsrv\\appcmd stop apppool /apppool.name:"JenkinsTutorialWebsiteAppPool"
+
+                    echo Deploying files...
+
+                    robocopy publish C:\\inetpub\\wwwroot\\JenkinsTutorialWebsite /MIR /R:1 /W:1
+
+                    echo Starting App Pool...
+
+                    %windir%\\system32\\inetsrv\\appcmd start apppool /apppool.name:"JenkinsTutorialWebsiteAppPool"
+                    """
             }
         }
       
