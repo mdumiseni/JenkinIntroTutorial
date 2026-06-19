@@ -4,6 +4,7 @@ pipeline {
     environment {
         DOTNET_ROOT = 'C:\\Program Files\\dotnet'
         PATH = "${env.PATH};${env.DOTNET_ROOT}"
+        BUILD_CONFIG = 'Release'
     }
     stages {
 
